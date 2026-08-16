@@ -1,5 +1,5 @@
 {
-    "geode": "5.0.0",
+    "geode": "5.9.0",
     "gd": {
         "win": "2.2081",
         "android": "2.2081",
@@ -11,10 +11,16 @@
     },
     "id": "timestepyt.nostupidbuttons",
     "name": "NoStupidButtons",
-    "version": "v1.2.4",
+    "version": "v1.3.0",
     "developer": "TimeStepYT",
     "description": "This mod hides the buttons nobody uses!",
-
+    "dependencies": {
+        "geode.node-ids": {
+            "version": ">=1.23.0",
+            "required": true
+        }
+    },
+    
     "settings": {
         "menulayer-title": {
             "type": "title",
@@ -73,6 +79,23 @@
             "name": "Hide Versus Button",
             "description": "Toggles if the Versus button should be removed from CreatorLayer",
             "default": false
-        }        
+        },
+        "editor-title": {
+            "type": "title",
+            "name": "Editor",
+            "description": "Everything that can be adjusted in the editor"
+        },
+        "hide-editor-help-button": {
+            "type": "bool",
+            "name": "Hide Help Button",
+            "description": "Toggles if the Help button should be removed from the editor pause menu",
+            "default": true
+        },
+        "hide-editor-exit-button": {
+            "type": "bool",
+            "name": "Hide Exit Button",
+            "description": "Toggles if the exit button should be removed from the editor pause menu",
+            "default": false
+        }
     }
 }

@@ -1,5 +1,9 @@
 # Changelog for NoStupidButtons
 
+## v1.3.0
+- Added the editor help button and a setting to hide the exit without saving button
+- Added NodeIDs as a required dependency
+
 ## v1.2.4
 - Updated to Geode v5.0.0 and GD 2.2081
 - The More Games button gets hidden again on mobile even if you have DevTools installed. (DevTools doesn't use the More Games button anymore)

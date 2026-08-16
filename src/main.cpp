@@ -4,6 +4,7 @@ using namespace geode::prelude;
 
 #include <Geode/modify/CreatorLayer.hpp>
 #include <Geode/modify/MenuLayer.hpp>
+#include <Geode/modify/EditorPauseLayer.hpp>
 
 bool isSettingEnabled(std::string setting) {
     return Mod::get()->getSettingValue<bool>(setting);
@@ -93,6 +94,8 @@ class $modify(MyCreatorLayer, CreatorLayer) {
     bool init() {
         if (!CreatorLayer::init()) return false;
 
+        NodeIDs::provideFor(this);
+
         auto creatorButtonsMenu = this->getChildByID("creator-buttons-menu");
 
         if (!creatorButtonsMenu) return true;
@@ -104,7 +107,40 @@ class $modify(MyCreatorLayer, CreatorLayer) {
             kys(versusButton);
         if (isSettingEnabled("hide-map-button"))
             kys(mapButton);
+
         creatorButtonsMenu->updateLayout();
+        return true;
+    }
+};
+
+class $modify(MyEditorPauseLayer, EditorPauseLayer) {
+    bool init(LevelEditorLayer* layer) {
+        if (!EditorPauseLayer::init(layer))
+            return false;
+
+        NodeIDs::provideFor(this);
+        
+        auto guidelinesMenu = this->getChildByID("guidelines-menu");
+        auto resumeMenu = this->getChildByID("resume-menu");
+
+        if (!guidelinesMenu || !resumeMenu)
+            return true;
+
+        auto helpButton = guidelinesMenu->getChildByID("help-button");
+        auto exitButton = resumeMenu->getChildByID("exit-button");
+
+        if (!helpButton || !exitButton)
+            return true;
+
+        if (isSettingEnabled("hide-editor-help-button")) {
+            kys(helpButton);
+            guidelinesMenu->updateLayout();
+        }
+        if (isSettingEnabled("hide-editor-exit-button")) {
+            kys(exitButton);
+            resumeMenu->updateLayout();
+        }
+
         return true;
     }
 };
